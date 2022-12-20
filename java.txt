@@ -1,0 +1,484 @@
+STAR CODE
+
+import java.util.Scanner;
+public class Edureka
+{
+    public static void main(String[] args)
+    {
+    Scanner sc = new Scanner(System.in);
+ 
+    System.out.println("Enter the number of rows: "); //takes input from user
+ 
+    int rows = sc.nextInt();
+ 
+    for (int i= rows-1; i>=0 ; i--)
+    {
+    for (int j=0; j<=i; j++)
+    {
+    System.out.print("*" + " ");
+    }
+    System.out.println();
+    }
+    sc.close();
+    }
+    }
+======================================
+MATRIX code
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Matrix {
+
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int a[][] = { { 5, 6, 7 }, { 8, 9, 10 }, { 3, 1, 2 } };
+    int b[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    int c[][] = new int[3][3];
+    System.out.println("A = " + Arrays.deepToString(a));
+    System.out.println("B = " + Arrays.deepToString(b));
+int choice;
+   do {
+     System.out.println("\nChoose the matrix operation,");
+      System.out.println("----------------------------");
+      System.out.println("1. Addition");
+      System.out.println("2. Subtraction");
+      System.out.println("3. Multiplication");
+      System.out.println("4. Transpose");
+      System.out.println("5. Exit");
+      System.out.println("----------------------------");
+      System.out.print("Enter your choice: ");
+      choice = scan.nextInt();
+
+      switch (choice) {
+      case 1:
+        c = add(a, b);
+        System.out.println("Sum of matrix: ");
+        System.out.println(Arrays.deepToString(c));
+        break;
+      case 2:
+        c = subtract(a, b);
+        System.out.println("Subtraction of matrix: ");
+        System.out.println(Arrays.deepToString(c));
+        break;
+      case 3:
+        c = multiply(a, b);
+        System.out.println("Multiplication of matrix: ");
+        System.out.println(Arrays.deepToString(c));
+        break;
+      case 4:
+        System.out.println("Transpose of the first matrix: ");
+        c = transpose(a);
+        System.out.println(Arrays.deepToString(c));
+        System.out.println("Transpose of the second matrix: ");
+        c = transpose(b);
+        System.out.println(Arrays.deepToString(c));
+        break;
+      case 5:
+        System.out.println("Thank You.");
+        return;
+      default:
+        System.out.println("Invalid input.");
+        System.out.println("Please enter the correct input.");
+      }
+    } while (true);
+  }
+
+  public static int[][] add(int[][] a, int[][] b) {
+    int row = a.length;
+    int column = a[0].length;
+    int sum[][] = new int[row][column];
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < column; j++) {
+        sum[i][j] = a[i][j] + b[i][j];
+      }
+    }
+    return sum;
+  }
+  public static int[][] subtract(int[][] a, int[][] b) {
+   int row = a.length;
+    int column = a[0].length;
+int sub[][] = new int[row][column];
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < column; j++) {
+        sub[i][j] = a[i][j] - b[i][j];
+      }
+    }
+    return sub;
+  }
+  public static int[][] multiply(int[][] a, int[][] b) {
+    int row = a.length;
+       int column = b[0].length;
+
+    
+    int product[][] = new int[row][column];
+
+   
+    for (int i = 0; i < row; i++) {
+
+      for (int j = 0; j < column; j++) {
+
+        product[i][j] = 0;
+
+    
+        for (int k = 0; k < a[0].length; k++) {
+          product[i][j] += a[i][k] * b[k][j];
+        }
+      }
+    }
+    return product;
+  }
+  public static int[][] transpose(int[][] a) {
+
+    int row = a.length;
+    int column = a[0].length;
+    int temp[][] = new int[row][column];
+
+
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < column; j++) {
+        
+        temp[i][j] = a[j][i];
+      }
+    }
+
+    return temp;
+  }
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+MULTILEVEL INHERITANCE
+
+
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+class Continent
+{
+String con;
+InputStreamReader i = new InputStreamReader(System.in);
+BufferedReader r = new BufferedReader(i);
+void con_input() throws IOException
+{
+System.out.println("Enter Continent Name: ");
+con = r.readLine();
+}
+}
+class Country extends Continent
+{
+String cou ;
+void cou_input() throws IOException
+{
+System.out.println("Enter Country Name: ");
+cou = r.readLine();
+}
+}
+class State extends Country
+{
+String sta;
+void sta_input() throws IOException
+{
+System.out.println("Enter State Name: ");
+sta = r.readLine();
+}
+}
+class Main extends State
+{
+String pla;
+void pla_input()throws IOException
+{
+System.out.println("Enter Place Name : ");
+pla = r.readLine();
+
+}
+
+public static void main( String argsp[] )throws IOException
+{
+Main s = new Main();
+s.con_input();
+s.cou_input();
+s.sta_input();
+s.pla_input();
+System.out.println("\n\nContinent: "+s.con);
+System.out.println("Country: "+s.cou);
+System.out.println("State: "+s.sta);
+System.out.println("Place :" + s.pla);
+}
+}
+
+==================================================================
+ARRAY LARGEST NUM
+===
+public class Example
+{
+public static void main(String[] args)
+{
+int n, max;
+Scanner s = new Scanner(System.in);
+System.out.print("Enter the number of elements in the array:");
+n = s.nextInt();
+int a[] = new int[n];
+System.out.println("Enter the elements of array:");
+for(int i = 0; i < n; i++)
+{
+a[i] = s.nextInt();
+}
+max = a[0];
+for(int i = 0; i < n; i++)
+{
+if(max < a[i])
+{
+max = a[i];
+}
+}
+System.out.println("Maximum value in the array is:"+max);
+}
+}
+===============================================================
+FACTORIAL
+
+public class Factorial {
+
+    public static void main(String[] args) {
+
+        int num = 10;
+        long factorial = 1;
+        for(int i = 1; i <= num; ++i)
+        {
+            // factorial = factorial * i;
+            factorial *= i;
+        }
+        System.out.printf("Factorial of %d = %d", num, factorial);
+    }
+}
+====================================================================
+CALCULATOR
+
+// Java program to create a simple calculator
+// with basic +, -, /, * using java swing elements
+
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+class calculator extends JFrame implements ActionListener {
+	// create a frame
+	static JFrame f;
+
+	// create a textfield
+	static JTextField l;
+
+	// store operator and operands
+	String s0, s1, s2;
+
+	// default constructor
+	calculator()
+	{
+		s0 = s1 = s2 = "";
+	}
+
+	// main function
+	public static void main(String args[])
+	{
+		// create a frame
+		f = new JFrame("calculator");
+
+		try {
+			// set look and feel
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		// create a object of class
+		calculator c = new calculator();
+
+		// create a textfield
+		l = new JTextField(16);
+
+		// set the textfield to non editable
+		l.setEditable(false);
+
+		// create number buttons and some operators
+		JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, ba, bs, bd, bm, be, beq, beq1;
+
+		// create number buttons
+		b0 = new JButton("0");
+		b1 = new JButton("1");
+		b2 = new JButton("2");
+		b3 = new JButton("3");
+		b4 = new JButton("4");
+		b5 = new JButton("5");
+		b6 = new JButton("6");
+		b7 = new JButton("7");
+		b8 = new JButton("8");
+		b9 = new JButton("9");
+
+		// equals button
+		beq1 = new JButton("=");
+
+		// create operator buttons
+		ba = new JButton("+");
+		bs = new JButton("-");
+		bd = new JButton("/");
+		bm = new JButton("*");
+		beq = new JButton("C");
+
+		// create . button
+		be = new JButton(".");
+
+		// create a panel
+		JPanel p = new JPanel();
+
+		// add action listeners
+		bm.addActionListener(c);
+		bd.addActionListener(c);
+		bs.addActionListener(c);
+		ba.addActionListener(c);
+		b9.addActionListener(c);
+		b8.addActionListener(c);
+		b7.addActionListener(c);
+		b6.addActionListener(c);
+		b5.addActionListener(c);
+		b4.addActionListener(c);
+		b3.addActionListener(c);
+		b2.addActionListener(c);
+		b1.addActionListener(c);
+		b0.addActionListener(c);
+		be.addActionListener(c);
+		beq.addActionListener(c);
+		beq1.addActionListener(c);
+
+		// add elements to panel
+		p.add(l);
+		p.add(ba);
+		p.add(b1);
+		p.add(b2);
+		p.add(b3);
+		p.add(bs);
+		p.add(b4);
+		p.add(b5);
+		p.add(b6);
+		p.add(bm);
+		p.add(b7);
+		p.add(b8);
+		p.add(b9);
+		p.add(bd);
+		p.add(be);
+		p.add(b0);
+		p.add(beq);
+		p.add(beq1);
+
+		// set Background of panel
+		p.setBackground(Color.blue);
+
+		// add panel to frame
+		f.add(p);
+
+		f.setSize(200, 220);
+		f.show();
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		String s = e.getActionCommand();
+
+		// if the value is a number
+		if ((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.') {
+			// if operand is present then add to second no
+			if (!s1.equals(""))
+				s2 = s2 + s;
+			else
+				s0 = s0 + s;
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+		else if (s.charAt(0) == 'C') {
+			// clear the one letter
+			s0 = s1 = s2 = "";
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+		else if (s.charAt(0) == '=') {
+
+			double te;
+
+			// store the value in 1st
+			if (s1.equals("+"))
+				te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+			else if (s1.equals("-"))
+				te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+			else if (s1.equals("/"))
+				te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+			else
+				te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+
+			// set the value of text
+			l.setText(s0 + s1 + s2 + "=" + te);
+
+			// convert it to string
+			s0 = Double.toString(te);
+
+			s1 = s2 = "";
+		}
+		else {
+			// if there was no operand
+			if (s1.equals("") || s2.equals(""))
+				s1 = s;
+			// else evaluate
+			else {
+				double te;
+
+				// store the value in 1st
+				if (s1.equals("+"))
+					te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+				else if (s1.equals("-"))
+					te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+				else if (s1.equals("/"))
+					te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+				else
+					te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+
+				// convert it to string
+				s0 = Double.toString(te);
+
+				// place the operator
+				s1 = s;
+
+				// make the operand blank
+				s2 = "";
+			}
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+	}
+}
+
+======================================================================
+AREA AND CIRCUMFERENCE 
+
+import java.util.*;
+ 
+public class CircleArea {
+ 
+    public static void main(String[] args) {
+ double radius, area, circumference;
+ Scanner in = new Scanner(System.in);
+ System.out.println("Enter Radius of Circle:");
+ radius = in.nextDouble();
+ // Calculate area and circumference of circle
+ area = Math.PI * radius * radius;
+ circumference = 2 * Math.PI * radius;
+ 
+ System.out.println("Area of Circle : " + area);
+ System.out.println("Circumference of Circle : " + circumference);
+    }
+ 
+}
+===============================================================
