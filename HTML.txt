@@ -1,0 +1,241 @@
+<?php
+include "ass3seta2.inc";
+$str=$_GET['str'];
+$op=$_GET['op'];
+$rld=" ";
+echo"<h1>String is $str</h1><br>";
+switch($op)
+{
+case 1:echo"Lenght of string is -> ".stringlen($str);
+	break;
+case 2:echo"Total vowels -> ".vowelcnt($str);
+	break;
+case 3:echo"String in lowercase -> ".strtolower($str);
+	break;
+case 4:echo"After padding string is -> ".str_pad($str,40,"*",STR_PAD_BOTH);
+	break;
+case 5:echo"After removing white space string is -> ".ltrim($str,$rld);
+	break;
+case 6:echo"Reverse string is -> ".strrev($str);
+	break;
+}
+?>
+
+
+<?php
+$a=$_GET['n1'];
+$b=$_GET['n2'];
+function modulus($a,$b)
+{
+	$c=$a%$b;
+	return "<p>The modulus of $a & $b is = $c</p><br>";
+}
+function power($a,$b)
+{
+	$c=pow($a,$b);
+	return "<p>$a^$b = $c</p><br>";
+}
+function sum($a)
+{
+	$sum=0;
+	for($i=1;$i<=$a;$i++)
+	{
+		$sum+=$i;
+	}
+	return "<p>Sum of 1st $a numbers is = $sum</p><br>";
+}
+function fact($b)
+{
+	$fact=1;
+	for($i=1;$i<=$b;$i++)
+	{
+		$fact*=$i;
+	}
+	return "<p>Factorial of $b is = $fact</p><br>";
+}
+echo modulus($a,$b);
+echo power($a,$b);
+echo sum($a);
+echo fact($b);
+?>
+======================
+ASS 3
+SETB
+<?php
+$str1=$_GET['str1'];
+$str2=$_GET['str2'];
+$num=$_GET['num'];
+$op=$_GET['op'];
+echo"first string is $str1 and second string is $str2<br><br>";
+switch($op)
+{
+case 1:$pos=strpos($str1,$str2);
+	if($pos!==0)
+		echo"string $str2 start with string $str1";
+	else
+		echo"string $str2 does not start with string $str1";
+	break;
+case 2:$pos=strpos($str1,$str2);
+	echo"$pos";
+	break;
+case 3:$test=strncasecmp($str1,$str2,$num);
+	if($test===0)
+		echo"<h3>the substring $str2 is equal to string $str1 up to $num</h3>";
+	else
+		echo"<h3>the substring $str2 is not equal to string $str1 up to $num</h3>";
+	break;
+}
+?> 
+================================
+SETB 3
+<?php
+$name=$_GET['stdnm'];
+$college=$_GET['collnm'];
+$greet_msg=$_GET['msg'];
+function msg($snm,$cnm,$msg="ICCS")
+{
+	return "$snm have sent following messange from college $cnm<br>message:$msg<br>";
+}
+echo msg($name,$college,$greet_msg);
+echo"<br>". msg($name,$college);
+echo "<br>".msg($name);
+?>
+================================
+B2
+<?php
+$str = $_GET['str'];
+$sep = $_GET['sep'];
+$rep = $_GET['rep'];
+echo "<h4> The string is $str<br>The separator is $sep<br></h4>";
+$arr = explode($sep,$str);
+echo "<h4> The splitted string is </h4>\n";
+	foreach ($arr as $ele){
+		echo "$ele<br>";
+	}
+echo "<br>The replaced string is :<br>".str_replace($sep,$rep,$str);
+?>
+===========================
+ASSS 4
+<?php
+$hightemps = array(68,70,72,58,60,79,82,73,75,77,73,68,79,54,67,78,77,69,68,81,80,77,75,65,74,71,70,82,55,67);
+$cnt=count($hightemps);
+$total = 0;
+foreach($hightemps as $t){
+	$total+=$t;
+}
+echo"Total = $total<br>";
+echo"Total using bulit-in function -> ".array_sum($hightemps);
+$avg=round($total/$cnt);
+echo"<br>The average high temperature for the month was $avg &deg F<br><br>";
+rsort($hightemps);
+$toptemps=array_slice($hightemps,0,5);
+echo"<br>The warmest five temperature were :<br>";
+foreach($toptemps as $t)
+{
+	echo"$t &deg F<br>";
+}
+$cooltemp=array_slice($hightemps,-5,5);
+echo"<br>Coolest five temperatures were :<br>";
+foreach($cooltemp as $c)
+{
+	echo"$c &deg F<br>";
+}
+?>
+===============================================
+STACK
+<?php
+$op = $_GET['op'];
+$ele = $_GET['ele'];
+$arr= array(10,20,30,40,50);
+switch($op)
+{
+case 1:echo"Stack before push :<br>";
+	print_r($arr);
+	echo"<br>";
+	echo"Stack after push :<br>";
+	array_push($arr,$ele,700);
+	print_r($arr);
+	break;
+case 2:echo"Stack before pop :<br>";
+	print_r($arr);
+	echo"<br>";
+	echo"Stack after pop: <br>";
+	$del =  array_pop($arr);
+	print_r($arr);
+	echo"<br>Deleted element is -> $del";
+	break;
+case 3:echo"Stack is -> <br>";
+	print_r($arr);
+	break;
+case 4:echo"Queue before insert :<br>";
+	print_r($arr);
+	echo"<br>";
+	echo"Queue after insert :<br>";
+	array_unshift($arr,$ele,700);
+	print_r($arr);
+	break;
+case 5:echo"Queue before deletion :<br>";
+	print_r($arr);
+	echo"<br>";
+	echo"Queue after deletion :<br>";
+	$del=array_shift($arr);
+	print_r($arr);
+	echo"<br>Deleted element is $del";
+	break;	
+case 6:echo"Queue is -> <br>";
+	print_r($arr);
+	break;
+}
+?>
+==============================
+ASS 5
+SETA
+A1
+<?php
+readfile("data.txt");
+echo "<br>File size in bytes :".filesize("data.txt");
+?>
+=========
+A2
+<?php
+$ename = "Dance";
+$db=pg_connect("host=127.0.0.1 port=5432 dbname = ishika user = postgres password=postgres") or die("Could not connect ....");
+$result=pg_query($db,"update committee set status = 'working' where cno in (select c.cno from event e,committee c,eve_com ec where e.eno=ec.eno and c.cno=ec.cno and e.title='$ename');")or die("Update query failed ....");
+echo "Record update successfully..";
+pg_free_result($result);
+pg_close($db);
+?>
+=====
+B1
+<?php
+$arr=file("item.dat");
+echo"<table border = 1><tr><th>Item Code</th><th>Item Name</th><th>Item Order</th><th>Item Price</th></tr>";
+foreach($arr as $ele)
+{
+	$a=explode(",",$ele);
+	echo"<tr><td>$a[0]</td>
+		<td>$a[1]</td>
+		<td>$a[2]</td>
+		<td>$a[3]</td>
+		</tr>";
+}
+echo"</table>";
+?>
+=======================================
+B2
+<?php
+$ename = "football";
+$db=pg_connect("host=127.0.0.1 port=5432 dbname = ishika user = postgres password=postgres") or die("Could not connect ....");
+$result = pg_query($db,"select * from student s,competition c,stud_com sc where s.stud_id=sc.stud_id and c.c_no=sc.c_no and rank='first' and c.name = '$ename';")or die("select query failed");
+echo"<table border = 1><tr><th>ID</th><th>Name</th><th>Class</th></tr>";
+while($row = pg_fetch_row($result))
+{
+	echo"<tr><td>$row[0]</td>
+		<td>$row[1]</td>
+		<td>$row[2]</td>
+		</tr>";
+}
+echo"</table>";
+pg_free_result($result);
+pg_close($db);
+?>

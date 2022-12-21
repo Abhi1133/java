@@ -1,0 +1,352 @@
+Ass 1
+Q1
+import pandas as pd 
+df=pd.read_csv("HeightWeight.csv")
+print("1st 10 values")
+print(df.head(10))
+print("last 10 values")
+print(df.tail(10))
+print("random 220 values")
+print(df.sample(n=20))
+
+2
+import pandas as pd 
+df=pd.read_csv("HeightWeight.csv")
+print("Size\n")
+print(df.size)
+print("shape\n")
+print(df.shape)
+print("dimensions\n")
+print(df.ndim)
+print("Datatype\n")
+print(df.dtypes)
+
+
+3
+import pandas as pd 
+df=pd.read_csv("HeightWeight.csv")
+print(df.info)
+print("\nCount Total NAN at each column in Dataframe :\n\n",df.isnull().sum())
+for i in range(len(df.index)):
+        print("Total NAN in row :",i+1,":",df.iloc[i].isnull().sum())
+print("\nCount Total NAN in Dataframe:\n\n",df.isnull().sum().sum())
+print(df.isnull())
+
+4
+import pandas as pd 
+df=pd.read_csv("HeightWeight.csv")
+print("Statistical data")
+print(df.describe)
+
+5
+import pandas as pd 
+import matplotlib.pyplot as plt
+df=pd.read_csv("HeightWeight.csv")
+df["BMI"]=None
+print(df)
+lbs_to_kg_ratio=0.443592
+inch_to_meter_ratio=0.0254
+df["Height(Inches)"]*=inch_to_meter_ratio
+df["Weight(Pounds)"]*=lbs_to_kg_ratio
+print(df)
+df["BMI"]=df["Weight(Pounds)"]/(df["Height(Inches)"]**2)
+print(df)
+#q6
+print("Min")
+print(df["BMI"].min())
+print("Max")
+print(df["BMI"].max())
+#q7
+plt.scatter(df["Weight(Pounds)"],df["Height(Inches)"])
+plt.xlabel("Weight(kg)")
+plt.ylabel("Height(cm)")
+plt.title("Height vs Weight")
+plt.show()
+
+============================
+Ass2
+set a
+
+1
+import numpy as np 
+a=np.arange(4).reshape((2,2))
+print("Original flattened array : ")
+print(a)
+print("Maximum value of the above flattened array :")
+print(np.amax(a))
+print("Minimu value of the above flattened array : ")
+print(np.amin(a))
+
+
+2
+import numpy as np 
+pt1=np.array((1,2,3))
+pt2=np.array((1,1,1))
+dist=np.linalg.norm(pt1-pt2)
+print("Distance using Euclidian formula between two datapoints in a dataset -> ",round(dist,4))
+
+3
+import numpy as np 
+import pandas as pd
+df=pd.DataFrame({'rating':[90,85,82,88,94,90,76,75,87,86],'points':[25,20,14,16,27,20,12,15,14,19],'assist':[5,7,7,8,5,7,6,9,9,5],'rebounds':[11,8,10,6,6,9,6,10,10,7]})
+#calculate interquartile range and values in the points column
+q75,q25=np.percentile(df['points'],[75,25])
+iqr=q75-q25
+print("Interquartile range in the points column -> ",iqr)
+
+4
+def distancesum(x,y,n): 
+    Sum=0
+    max1=0
+    for i in range(n):
+        for j in range(i+1,n):
+            Sum=(abs(x[i]-x[j])+abs(y[i]-y[j]))
+            max1=max((max1,Sum))
+    return max1
+x=[-1,1,3,2]
+y=[5,6,5,3]
+n=len(x)
+print("Sum of Manhattan distance between all pairs of points -> ",distancesum(x,y,n))
+
+
+5
+import numpy as np 
+import matplotlib.pyplot as plt
+nums=np.array([0.5,0.7,1.0,1.2,1.3,2.1])
+bins=np.array([0,1,2,3])
+print("nums : ",nums)
+print("bins : ",bins)
+print("Result : ",np.histogram(nums,bins))
+plt.hist(nums,bins=bins,color="green")
+plt.show()
+
+6
+import pandas as pd 
+import numpy as np
+import statistics as st
+df=pd.read_csv("student.csv")
+print(df)
+ageavg=df['age'].mean()
+print("Average age of students -> ",round(ageavg,4))
+peravg=df['gper'].mean()
+print("Average Graduation Percentage of student -> ",round(peravg,4))
+print(df.describe())
+
+===================================================
+SET B
+MAXIMUM N MINIMUM VALUES
+from pandas.api.types import is_numeric_dtype 
+import pandas as pd
+data=pd.read_csv("iris.data")
+data.columns=['sepal length','sepal width','petal length','petal width','class']
+print(data.head())
+for col in data.columns:
+    if is_numeric_dtype(data[col]):
+        print('%s : ',(col))
+        print('\t Mean = ',round(data[col],2))
+        print('\t Standard deviation = ',round(data[col],2))
+        print('\t Minimum = ',round(data[col],2))
+        print('\t Maximum = ',round(data[col],2))
+print(data['class'].value_counts())
+data.describe(include='all')
+===================================================
+ASS3
+SET A
+q3
+import pandas as pd 
+from sklearn.preprocessing import LabelEncoder,OneHotEncoder
+df=pd.read_csv("Data.csv")
+labelencoder = LabelEncoder()
+df['Purchased']=labelencoder.fit_transform(df['Purchased'])
+print("Label Encoding")
+print(df)
+print("One hot coding");
+enc=OneHotEncoder(handle_unknown='ignore')
+frame=pd.DataFrame(enc.fit_transform(df[['Country']]).toarray())
+print(frame)
+
+
+q2
+import pandas as pd 
+df=pd.read_csv("Data.csv")
+print(df.fillna(df.mean()))
+
+q1
+
+import pandas as pd 
+df=pd.read_csv("Data.csv")
+print("Describe\n")
+print(df.describe())
+print("shape\n")
+print(df.shape)
+print("1st 3 rows\n")
+print(df.head(3))
+
+===========================
+SET B
+setb
+import pandas as pd 
+import numpy as np
+from sklearn import preprocessing
+import scipy.stats as s
+df=pd.read_csv("winequality-red .csv")
+d={'CO1':[1,3,7,4],'CO2':[12,2,7,1],'CO3':[22,34,-11,9]}
+df2=pd.DataFrame(d)
+print("original dataset-> \n",df2)
+print("Data Scaled from 0-1")
+data_scaler=preprocessing.MinMaxScaler(feature_range=(0,1))
+data_scaled=data_scaler.fit_transform(df2)
+print("Min Max Scaled data")
+print(data_scaled.round(2))
+print("Standardizing")
+X_train=np.array([[1.,-1.,2.,],[2.,0.,0.,],[0.,1.,-1.]])
+print("Original Data -> \n",X_train);
+print("\nInitial Mean:",s.tmean(X_train).round(2))
+print("Initial Standard Deviation :",round(X_train.std(),2))
+X_scaled=preprocessing.scale(X_train)
+X_scaled.mean(axis=0)
+X_scaled.std(axis=0)
+print("\nStandardizing Data\n",X_scaled.round(2))
+print("\nScaled Mean:",s.tmean(X_scaled).round(2))
+print("Scaled Standard Deviation :",round(X_scaled.std(),2))
+
+print("\nNormalizing")
+dn=preprocessing.normalize(df2,norm='l1')
+print(dn.round(2))
+
+data_binarized=preprocessing.Binarizer(threshold=5).transform(df2)
+print("Binarized data\n")
+print(data_binarized)
+
+====================
+SETC
+setc
+import pandas as pd 
+import numpy as np
+from matplotlib import pyplot as plt
+df=pd.read_csv("student_bucket.csv")
+print("Shape ->\n",df.shape)
+print("5 rows -> \n",df.head(5))
+m1=min(df['marks'])
+m2=max(df['marks'])
+bins=np.linspace(m1,m2,6)
+name=['poor','Below_average','Average','Above_average','Excellent']
+df['marks_bins']=pd.cut(df['marks'],bins,labels=name,include_lowest=True)
+print("Binned Dataset")
+print("---------------------")
+print(df)
+print("10 cols -> \n",df.head(10))
+
+=================================
+ASS 4
+a2
+import matplotlib.pyplot as plt 
+data = [1,1,2,2,4,5,6.8,7.2,8,8.3,9,10,10,11.5,50,60]
+plt.boxplot(data,vert=False)
+plt.show()
+
+a3
+import matplotlib.pyplot as plt 
+import numpy as np
+subject = ['maths','english','science','social','computer']
+marks = [70,80,50,30,78]
+plt.bar(subject,marks)
+plt.show()
+plt.pie(marks,labels=subject)
+plt.show()
+
+a4
+import pandas as pd 
+import seaborn as sns
+import matplotlib.pyplot as plt
+iris=pd.read_csv("Iris.csv")
+print(iris)
+sns.countplot("Species",data=iris)
+plt.show()
+
+a5
+import pandas as pd 
+import matplotlib.pyplot as plt
+iris=pd.read_csv("Iris.csv")
+iris['Species'].value_counts().plot.pie(explode=[0.1,0.1,0.1],autopct='%1.1f%%',shadow=True,figsize=(10,8))
+plt.title("Iris Species %")
+plt.show()
+
+a6
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris=pd.read_csv("Iris.csv")
+x=iris['SepalLengthCm']
+y=iris['SepalWidthCm']
+z=iris['PetalLengthCm']
+w=iris['PetalWidthCm']
+plt.hist(x,bins=20,color='green')
+plt.title("Sepal lentgh in cm")
+plt.xlabel("sepal_length_cm")
+plt.ylabel("count")
+plt.show()
+plt.hist(y,bins=20,color='yellow')
+plt.title("Sepal width in cm")
+plt.xlabel("sepal_width_cm")
+plt.ylabel("count")
+plt.show()
+plt.hist(z,bins=20,color='blue')
+plt.title("Petal lentgh in cm")
+plt.xlabel("petal_length_cm")
+plt.ylabel("count")
+plt.show()
+plt.hist(w,bins=20,color='red')
+plt.title("petal lentgh in cm")
+plt.xlabel("petal_width_cm")
+plt.ylabel("count")
+plt.show()
+
+================================
+SET B
+b1
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris=pd.read_csv("Iris.csv")
+fig=iris[iris.Species=="Iris-setosa"].plot.scatter(x="PetalLengthCm",y="PetalWidthCm",color="Orange",label="Setosa")
+iris[iris.Species=="Iris-versicolor"].plot.scatter(x="PetalLengthCm",y="PetalWidthCm",color="blue",label="versicolor",ax=fig)
+iris[iris.Species=="Iris-virginica"].plot.scatter(x="PetalLengthCm",y="PetalWidthCm",color="green",label="virginica",ax=fig)
+fig.set_xlabel("petal length")
+fig.set_ylabel("petal wigth")
+fig.set_title("Petal length vs petal width")
+plt.show()
+
+b2
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris=pd.read_csv("Iris.csv")
+iris.plot(kind="scatter",x="SepalLengthCm",y="PetalLengthCm")
+plt.grid()
+plt.show()
+
+b3
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris=pd.read_csv("Iris.csv")
+x=iris['SepalLengthCm']
+plt.boxplot(x,vert=False)
+plt.title("sepal-length")
+plt.show()
+y=iris['SepalWidthCm']
+plt.boxplot(y,vert=False)
+plt.title("sepal-width")
+plt.show()
+z=iris['PetalLengthCm']
+plt.boxplot(z,vert=False)
+plt.title("petal-length")
+plt.show()
+w=iris['PetalWidthCm']
+plt.boxplot(w,vert=False)
+plt.title("petal-width")
+plt.show()
+
+
+
